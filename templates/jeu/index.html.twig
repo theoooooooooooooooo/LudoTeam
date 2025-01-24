@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des jeux{% endblock %}
+
+{% block body %}
+    <h1>Liste des jeux</h1>
+
+    <a href="{{ path('app_jeu_new') }}" class="btn btn-primary mb-3">Ajouter un nouveau jeu</a>
+    <br>
+    <div class="games-container">
+        {% for item in jeux %}
+            <div class="game-card">
+                <h3>{{ item.jeu.nom }}</h3> <a href="{{ path('app_jeu_edit', {'id': item.jeu.id}) }}" class="btn btn-warning mb-3">Modifier</a>
+                <p><strong>Type :</strong> {{ item.type }}</p>
+                <p><strong>Nombre de joueurs :</strong> {{ item.jeu.nbJoueur }}</p>
+                
+                <div class="game-info">
+                    <strong>Informations complémentaire du jeu:</strong>
+                    {% if item.type == 'JeuDeCarte' %}
+                        <p>Nombre de cartes : {{ item.jeu.nbCarte }}</p>
+                    {% elseif item.type == 'JeuDePlateau' %}
+                        <p>Plateau : {{ item.jeu.plateauType }}</p>
+                    {% elseif item.type == 'JeuDeDuel' %}
+                        <p>Aucune donnée</p>
+                    {% else %}
+                        <p>Aucune information spécifique</p>
+                    {% endif %}
+                </div>
+
+                <div class="game-events">
+                    <strong>Evénements :</strong>
+                    {% if item.jeu.events|length > 0 %}
+                        <ul>
+                            {% for event in item.jeu.events %}
+                                <li>{{ event.nom }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% else %}
+                        <p>Aucun événement associé</p>
+                    {% endif %}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+{% endblock %}

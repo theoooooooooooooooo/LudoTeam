@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Sélectionner un type de jeu{% endblock %}
+
+{% block body %}
+    <h1>Créer un jeu</h1>
+    <p>Choisissez le type de jeu que vous souhaitez créer :</p>
+    <ul>
+        {% for label, type in types %}
+            <li>
+                <a href="{{ path('app_jeu_new', {'type': type}) }}">{{ label }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}
