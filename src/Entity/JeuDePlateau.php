@@ -7,20 +7,12 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: JeuDePlateauRepository::class)]
-class JeuDePlateau
+class JeuDePlateau extends Jeu
 {
-    #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column]
-    private ?int $id = null;
 
     #[ORM\Column(type: Types::TEXT)]
     private ?string $ressource = null;
 
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
 
     public function getRessource(): ?string
     {

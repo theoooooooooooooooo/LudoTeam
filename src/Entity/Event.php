@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\EventRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -19,6 +21,17 @@ class Event
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $dateHeure = null;
+
+    /**
+     * @var Collection<int, Jeu>
+     */
+    #[ORM\ManyToMany(targetEntity: Jeu::class, inversedBy: 'events')]
+    private Collection $jeus;
+
+    public function __construct()
+    {
+        $this->jeus = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -45,6 +58,30 @@ class Event
     public function setDateHeure(\DateTimeInterface $dateHeure): static
     {
         $this->dateHeure = $dateHeure;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Jeu>
+     */
+    public function getJeus(): Collection
+    {
+        return $this->jeus;
+    }
+
+    public function addJeu(Jeu $jeu): static
+    {
+        if (!$this->jeus->contains($jeu)) {
+            $this->jeus->add($jeu);
+        }
+
+        return $this;
+    }
+
+    public function removeJeu(Jeu $jeu): static
+    {
+        $this->jeus->removeElement($jeu);
 
         return $this;
     }
