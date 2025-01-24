@@ -6,6 +6,68 @@
         <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
         {% block stylesheets %}
         {% endblock %}
+        <style>
+        /* Conteneur pour les jeux */
+        .games-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        /* Carte pour chaque jeu */
+        .game-card {
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            width: 250px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease;
+        }
+
+        .game-card:hover {
+            transform: translateY(-5px);
+        }
+
+        /* Titre du jeu */
+        .game-card h3 {
+            font-size: 1.2rem;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        /* Information du jeu */
+        .game-card p {
+            font-size: 1rem;
+            margin: 5px 0;
+        }
+
+        /* Information des événements */
+        .game-events ul {
+            padding-left: 20px;
+        }
+
+        .game-events p {
+            font-style: italic;
+            color: #666;
+        }
+
+        /* Bouton ajouter un jeu */
+        .btn-primary {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+
+        </style>
 
         {% block javascripts %}
             {% block importmap %}{{ importmap('app') }}{% endblock %}
